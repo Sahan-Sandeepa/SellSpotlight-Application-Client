@@ -1,4 +1,5 @@
-# SellSpotlight web application that serves as the ultimate real estate marketplace, connecting property buyers, sellers, and agents on one platform.
+# 
+SellSpotlight web application that serves as the ultimate real estate marketplace, connecting property buyers, sellers, and agents on one platform.
 
 <div align="center" style="margin: 30px;">
     <a href="https://refine.dev">
