@@ -55,42 +55,43 @@ axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
 
 function App() {
   const authProvider: AuthProvider = {
+
     login: async ({ credential }: CredentialResponse) => {
       const profileObj = credential ? parseJwt(credential) : null;
 
       if (profileObj) {
-        const response = await fetch(
-          "http://localhost:8080/api/v1/users",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
+        try {
+          // Use axiosInstance instead of fetch for consistent authorization headers
+          const response = await axiosInstance.post(
+            "http://localhost:8080/api/v1/users",
+            {
               name: profileObj.name,
               email: profileObj.email,
               avatar: profileObj.picture,
-            }),
-          },
-        );
-
-        const data = await response.json();
-
-        if (response.status === 200) {
-          localStorage.setItem(
-            "user",
-            JSON.stringify({
-              ...profileObj,
-              avatar: profileObj.picture,
-              userid: data._id,
-            }),
+            }
           );
-        } else {
-          return Promise.reject();
+
+          // Check for successful response
+          if (response.status === 200) {
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                ...profileObj,
+                avatar: profileObj.picture,
+                userid: response.data._id, // Use response.data to access the data sent by the server
+              })
+            );
+          } else {
+            return Promise.reject();
+          }
+        } catch (error) {
+          return Promise.reject(); // Reject the login promise on error
         }
       }
       localStorage.setItem("token", `${credential}`);
-
       return Promise.resolve();
     },
+
     logout: () => {
       const token = localStorage.getItem("token");
 
