@@ -9,6 +9,7 @@ import {
   TotalRevenue,
   PropertyCard,
 } from "components";
+import { red } from "@mui/material/colors";
 
 const Home = () => {
   const { data, isLoading, isError } = useList({
@@ -26,12 +27,12 @@ const Home = () => {
   if (isError) return <Typography>Something went wrong!</Typography>;
 
   return (
-    <Box>
-      <Typography fontSize={25} fontWeight={700} color="#11142D">
+    <Box border="2px solid #ccc" borderRadius="15px" p={4}>
+      <Typography fontSize={25} fontWeight={700} color="#11142D" display="flex" justifyContent="center">
         Dashboard
       </Typography>
 
-      <Box mt="20px" display="flex" flexWrap="wrap" gap={4}>
+      <Box mt="20px" display="flex" flexWrap="wrap" bgcolor="#d3d3d3" gap={4} border="1px solid #c4e5ed" borderRadius="15px" p={3}>
         <PieChart
           title="Properties for Sale"
           value={684}
@@ -60,9 +61,11 @@ const Home = () => {
 
       <Stack
         mt="25px"
-        width="100%"
+        width="auto"
+        bgcolor="#d3d3d3"
         direction={{ xs: "column", lg: "row" }}
         gap={4}
+        border="1px solid #c4e5ed" borderRadius="15px" p={3}
       >
         <TotalRevenue />
         <PropertyReferrals />
@@ -72,13 +75,12 @@ const Home = () => {
         flex={1}
         borderRadius="15px"
         padding="20px"
-        bgcolor="#fcfcfc"
         display="flex"
         flexDirection="column"
-        minWidth="100%"
+        minWidth="auto"
         mt="25px"
       >
-        <Typography fontSize="18px" fontWeight={600} color="#11142d">
+        <Typography fontSize="18px" fontWeight={600} color="#11142d" bgcolor="#d3d3d3" border="1px solid #c4e5ed" borderRadius="15px" p={3}>
           Latest Properties
         </Typography>
 
