@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { useGetIdentity, useOne } from "@refinedev/core";
 
 import { Profile } from "components";
@@ -17,13 +18,16 @@ const MyProfile = () => {
   if (isError) return <div>error...</div>;
 
   return (
-    <Profile
+    <Box border="1px solid #ccc" borderRadius="15px" p={3}>
+      <Profile
       type="My"
       name={myProfile.name}
       avatar={myProfile.avatar}
       email={myProfile.email}
       properties={myProfile.allProperties}
     />
+    </Box>
+    
   );
 };
 
